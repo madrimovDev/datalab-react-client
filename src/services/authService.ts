@@ -1,27 +1,21 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import api from '../api'
+import { ErrorMessage, UserResponse, ErrorResponse } from './types/type'
 
-type AuthError = AuthError.Response | AuthError.ErrorMessage
+export type AuthError = ErrorResponse | ErrorMessage
 
 const authService = {
 	baseURL: '/auth',
-	async login(): Promise<AxiosResponse<AuthResponse.User> | AxiosError<AuthError>> {
-		try {
-			const response = await api.post<AuthResponse.User>(`${this.baseURL}/login`)
-			return response
-		} catch (e) {
-			const error = e as unknown as AxiosError<AuthError>
-			return error
-		}
+	async login(username: string, password: string) {
+		const response = await api.post<UserResponse>(`${this.baseURL}/login`, {
+			username,
+			password
+		})
+		return response
 	},
-	async register(): Promise<AxiosResponse<AuthResponse.User> | AxiosError<AuthError>> {
-		try {
-			const response = await api.post(`${this.baseURL}/register`)
-			return response
-		} catch (e) {
-			const error = e as unknown as AxiosError<AuthError>
-			return error
-		}
+	async register() {
+		const response = await api.post(`${this.baseURL}/register`)
+		return response
 	}
 }
 

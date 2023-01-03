@@ -1,31 +1,28 @@
-declare namespace AuthResponse {
-	export interface User {
-		id: number
-		name: string
-		group: string
-		username: string
-		token: string
-		isAdmin: boolean
-	}
-
-	export interface Response {
-		message: string
-		user: User
-	}
+export interface User {
+	id: number
+	name: string
+	group: string
+	username: string
+	token: string
+	isAdmin: boolean
 }
-declare namespace AuthError {
-	export interface Error {
-		property: string
-		reason: string
-	}
 
-  export interface ErrorMessage {
-    message: string
-  }
+export interface UserResponse {
+	message: string
+	user: User
+}
 
-	export interface Response {
-		message: string
-		errors: Error[]
-	}
+export interface Error {
+	property: string
+	reason: string
+}
+
+export interface ErrorMessage {
+	message: string
+}
+
+export interface ErrorResponse {
+	message: string
+	errors: Error[]
 }
 
