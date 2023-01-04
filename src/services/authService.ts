@@ -1,4 +1,3 @@
-import { AxiosError, AxiosResponse } from 'axios'
 import api from '../api'
 import { ErrorMessage, UserResponse, ErrorResponse } from './types/type'
 
@@ -13,8 +12,13 @@ const authService = {
 		})
 		return response
 	},
-	async register() {
-		const response = await api.post(`${this.baseURL}/register`)
+	async register(username: string, password: string, name: string, group: string) {
+		const response = await api.post(`${this.baseURL}/register`, {
+			username,
+			password,
+			name,
+			group
+		})
 		return response
 	}
 }

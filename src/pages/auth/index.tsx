@@ -1,56 +1,27 @@
-import React, { FormEvent, useEffect, useState } from 'react'
-import { Grid, Input, Button, Card } from '@nextui-org/react'
-import { useAppDispatch, useAppSelector } from '../../store'
-import { login } from '../../store/auth/action'
+import React, { useLayoutEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useAppSelector } from '../../store'
+import Login from './login'
+import Register from './register'
 
 const Auth = () => {
-	const [username, setUserName] = useState<string>('')
-	const [password, setPassword] = useState<string>('')
-	const dispatch = useAppDispatch()
-	const selector = useAppSelector((state) => state.auth)
-	const onSubmit = (event: FormEvent) => {
-		event.preventDefault()
-		dispatch(login({ username, password }))
-	}
-	useEffect(() => {
-		console.log(selector)
-	}, [selector])
+	const { auth } = useParams()
+	const { status, user } = useAppSelector((state) => state.auth)
+	const navigate = useNavigate()
+
+	useLayoutEffect(() => {
+		if (status === 'fulfilled' && user) {
+			navigate('/')
+		} else {
+			navigate('/auth/login')
+		}
+	}, [status, user])
 
 	return (
-		<Grid.Container
-			css={{
-				w: '100dvw',
-				h: '100dvh'
-			}}
-			justify='center'
-			alignItems='center'
-		>
-			<Card
-				as='form'
-				onSubmit={onSubmit}
-				css={{
-					w: '300px',
-					p: 30,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'stretch',
-					gap: '$10'
-				}}
-			>
-				<Input
-					label='Username'
-					type='text'
-					value={username}
-					onChange={(event) => setUserName(event.target.value)}
-				/>
-				<Input.Password
-					label='Password'
-					value={password}
-					onChange={(event) => setPassword(event.target.value)}
-				/>
-				<Button type='submit'>Login</Button>
-			</Card>
-		</Grid.Container>
+		<>
+			{auth === 'login' && <Login />}
+			{auth === 'register' && <Register />}
+		</>
 	)
 }
 

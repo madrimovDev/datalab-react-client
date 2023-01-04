@@ -16,12 +16,28 @@ export const login = createAsyncThunk(
 	}
 )
 
-export const register = createAsyncThunk('auth/register', async (_, { rejectWithValue }) => {
-	try {
-		const res = await authService.register()
-		return res
-	} catch (e) {
-		throw rejectWithValue(e)
+export const register = createAsyncThunk(
+	'auth/register',
+	async (
+		{
+			username,
+			password,
+			name,
+			group
+		}: {
+			username: string
+			password: string
+			name: string
+			group: string
+		},
+		{ rejectWithValue }
+	) => {
+		try {
+			const res = await authService.register(username, password, name, group)
+			return res
+		} catch (e) {
+			throw rejectWithValue(e)
+		}
 	}
-})
+)
 

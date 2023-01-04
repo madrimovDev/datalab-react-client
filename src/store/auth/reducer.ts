@@ -1,8 +1,6 @@
 import { AxiosResponse } from 'axios'
-import { AnyAction, createReducer, AsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { AuthError } from '../../services/authService'
+import { AnyAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
 import { User, UserResponse } from '../../services/types/type'
-import { login, register } from './action'
 
 type Status = 'pending' | 'rejected' | 'fulfilled' | 'default'
 
@@ -13,6 +11,7 @@ interface AuthState {
 }
 
 type FulfilledAction = PayloadAction<
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	AxiosResponse<UserResponse, any>,
 	string,
 	{
@@ -46,12 +45,14 @@ const reducer = createReducer(initialState, (builder) => {
 		state.message = action.payload.data.message
 		state.status = 'fulfilled'
 		state.user = action.payload.data.user
+		localStorage.setItem('userToken', action.payload.data.user.token)
 	})
 	builder.addMatcher(isPending, (state) => {
 		state.status = 'pending'
 		state.user = undefined
 		state.message = undefined
 	})
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	builder.addMatcher(isRejected, (state, action: PayloadAction<any>) => {
 		state.message = action.payload.message
 		state.status = 'rejected'
