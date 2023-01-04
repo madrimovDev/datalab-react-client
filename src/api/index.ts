@@ -12,7 +12,6 @@ api.interceptors.request.use(
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		//@ts-ignore
 		config.headers.Authorization = localStorage.getItem('accessToken')
-		console.log(config.headers)
 		return config
 	},
 	(err) => {
