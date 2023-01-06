@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { AnyAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
-import { User, UserResponse } from '../../services/types/type'
+import { User, UserResponse } from '../../services/types/auth'
 
 type Status = 'pending' | 'rejected' | 'fulfilled' | 'default'
 

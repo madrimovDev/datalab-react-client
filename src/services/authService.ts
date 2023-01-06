@@ -1,5 +1,5 @@
 import api from '../api'
-import { ErrorMessage, UserResponse, ErrorResponse } from './types/type'
+import { ErrorMessage, UserResponse, ErrorResponse } from './types/auth'
 
 export type AuthError = ErrorResponse | ErrorMessage
 
