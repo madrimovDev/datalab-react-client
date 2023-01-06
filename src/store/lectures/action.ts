@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import lectureService from '../../services/lectureService'
-import { LectureError } from '../../services/types/lectures'
 
 export const getAllLectures = createAsyncThunk('lectures/getAll', async (_, { rejectWithValue }) => {
 	try {

@@ -1,5 +1,4 @@
-import { createReducer, PayloadAction, SerializedError } from '@reduxjs/toolkit'
-import { Lectures } from '../../services/types/lectures'
+import { createReducer, PayloadAction } from '@reduxjs/toolkit'
 import { Status } from '../types'
 import { getAllLectures } from './action'
 import { isPending, isRejected } from './matcher'
@@ -22,6 +21,7 @@ const reducer = createReducer(initialState, (builder) => {
 		state.status = 'fulfilled'
 		state.lectures = action.payload.data.lectures
 	})
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	builder.addMatcher(isRejected, (state, action: PayloadAction<any>) => {
 		state.message = action.payload.message
 		state.status = 'rejected'

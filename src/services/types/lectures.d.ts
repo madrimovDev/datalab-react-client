@@ -1,4 +1,3 @@
-import { Lecture } from './lectures.d'
 declare namespace Lectures {
 	export interface Lecture {
 		id: number

@@ -1,5 +1,4 @@
 import api from '../api'
-import { Lectures } from './types/lectures'
 
 const lectureService = {
 	baseUrl: '/lectures',
