@@ -1,16 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { Grid } from '@nextui-org/react'
-import { useAppDispatch, useAppSelector } from '../../store'
+import { useAppDispatch, useAppSelector, RootState } from '../../store'
 import { Sidebar } from '../../ui'
 import { getAllLectures } from '../../store/lectures/action'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const Lectures = () => {
 	const { user } = useAppSelector((state) => state.auth)
+	const { lectures } = useAppSelector((state) => state.lectures)
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
+
 	useEffect(() => {
 		dispatch(getAllLectures())
 	}, [])
+
+	useEffect(() => {
+		if (lectures.length) {
+			navigate('lectures' + '/' + lectures[0].id)
+		}
+	}, [lectures])
 
 	return (
 		<Grid.Container css={{ mt: '$8' }}>
@@ -24,5 +33,5 @@ const Lectures = () => {
 	)
 }
 
-export default Lectures
+export default memo(Lectures)
 

@@ -1,5 +1,5 @@
 import { Container, Text } from '@nextui-org/react'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../store'
 import getById from '../../store/lecture/action'
