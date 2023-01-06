@@ -1,34 +1,37 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { RootLayout } from '../layouts'
 import AdminLayout from '../layouts/AdminLayout'
 import UserLayout from '../layouts/UserLayout'
 import { RequireAuth } from '../pages'
 import Auth from '../pages/auth'
 import RequireRole from '../pages/requireRole'
+import adminRouter from './adminRouter'
+import userRouter from './userRouter'
 
 const rootRouter = createBrowserRouter([
+	{
+		path: '/auth/:auth',
+		element: <Auth />
+	},
 	{
 		path: '/',
 		element: <RequireAuth />,
 		children: [
 			{
-				path: '/',
+				index: true,
 				element: <RequireRole />
 			},
 			{
 				path: '/admin',
-				element: <AdminLayout />
+				element: <AdminLayout />,
+				children: adminRouter
 			},
 			{
 				path: '/user',
-				element: <UserLayout />
+				element: <UserLayout />,
+				children: userRouter
 			}
 		]
-	},
-	{
-		path: '/auth/:auth',
-		element: <Auth />
 	}
 ])
 

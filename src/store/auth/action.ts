@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { authService } from '../../services'
 import { AuthError } from '../../services/authService'
 
@@ -40,4 +40,6 @@ export const register = createAsyncThunk(
 		}
 	}
 )
+
+export const logout = createAction('auth/logout')
 

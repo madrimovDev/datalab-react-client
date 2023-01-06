@@ -1,10 +1,11 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import { Navbar } from '../ui'
 
 const AdminLayout = () => {
 	return (
 		<div>
-			navbar Admin
+			<Navbar type='admin'/>
 			<Outlet />
 		</div>
 	)

@@ -1,6 +1,8 @@
 import { AxiosResponse } from 'axios'
-import { AnyAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
+import { createReducer, PayloadAction } from '@reduxjs/toolkit'
 import { User, UserResponse } from '../../services/types/auth'
+import { logout } from './action'
+import { isFulfilled, isPending, isRejected } from './matcher'
 
 type Status = 'pending' | 'rejected' | 'fulfilled' | 'default'
 
@@ -22,18 +24,6 @@ type FulfilledAction = PayloadAction<
 	never
 >
 
-const isPending = (action: AnyAction): boolean => {
-	return action.type.startsWith('auth/') && action.type.endsWith('/pending')
-}
-
-const isFulfilled = (action: AnyAction): boolean => {
-	return action.type.startsWith('auth/') && action.type.endsWith('/fulfilled')
-}
-
-const isRejected = (action: AnyAction): boolean => {
-	return action.type.startsWith('auth/') && action.type.endsWith('/rejected')
-}
-
 const initialState: AuthState = {
 	message: undefined,
 	status: 'default',
@@ -41,6 +31,12 @@ const initialState: AuthState = {
 }
 
 const reducer = createReducer(initialState, (builder) => {
+	builder.addCase(logout, (state) => {
+		state.message = undefined
+		state.status = 'default'
+		state.user = undefined
+		localStorage.clear()
+	})
 	builder.addMatcher(isFulfilled, (state, action: FulfilledAction) => {
 		state.message = action.payload.data.message
 		state.status = 'fulfilled'
