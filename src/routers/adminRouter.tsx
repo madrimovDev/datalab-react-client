@@ -1,6 +1,6 @@
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
-import { Lectures, Lecture } from '../pages'
+import { Lectures, Lecture, CreateLecture } from '../pages'
 
 const adminRouter: RouteObject[] = [
 	{
@@ -10,6 +10,10 @@ const adminRouter: RouteObject[] = [
 			{
 				path: 'lectures/:id',
 				element: <Lecture />
+			},
+			{
+				path: 'create-lecture',
+				element: <CreateLecture />
 			}
 		]
 	}

@@ -1,17 +1,26 @@
 import React from 'react'
 import { Button, Divider, styled, Text } from '@nextui-org/react'
 import List from './list/List'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
 	isAdmin?: boolean
 }
 
 const Sidebar = ({ isAdmin }: Props) => {
+	const navigate = useNavigate()
 	return (
 		<StyledSidebar>
 			<Text h4>Lectures</Text>
 			<Divider css={{ my: '$3' }} />
-			{isAdmin && <Button size='sm'>Add Lectures</Button>}
+			{isAdmin && (
+				<Button
+					size='sm'
+					onPress={() => navigate('create-lecture')}
+				>
+					Add Lectures
+				</Button>
+			)}
 			<List />
 		</StyledSidebar>
 	)

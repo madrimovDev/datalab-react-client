@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react'
 import { Grid } from '@nextui-org/react'
-import { useAppDispatch, useAppSelector, RootState } from '../../store'
+import { useAppDispatch, useAppSelector } from '../../store'
 import { Sidebar } from '../../ui'
 import { getAllLectures } from '../../store/lectures/action'
 import { Outlet, useNavigate } from 'react-router-dom'
