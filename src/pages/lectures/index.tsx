@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Grid } from '@nextui-org/react'
-import { useAppSelector } from '../../store'
+import { useAppDispatch, useAppSelector } from '../../store'
 import { Sidebar } from '../../ui'
+import { getAllLectures } from '../../store/lectures/action'
+import { Outlet } from 'react-router-dom'
 
 const Lectures = () => {
 	const { user } = useAppSelector((state) => state.auth)
+	const dispatch = useAppDispatch()
+	useEffect(() => {
+		dispatch(getAllLectures())
+	}, [])
+
 	return (
 		<Grid.Container>
-			<Grid
-				css={{ border: '1px solid red' }}
-				xs={2}
-			>
+			<Grid xs={3}>
 				<Sidebar isAdmin={user?.isAdmin} />
 			</Grid>
-			<Grid
-				css={{ border: '1px solid red' }}
-				xs={10}
-			>
-				Content
+			<Grid xs={9}>
+				<Outlet />
 			</Grid>
 		</Grid.Container>
 	)

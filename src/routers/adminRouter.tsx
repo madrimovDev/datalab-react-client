@@ -1,11 +1,17 @@
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
-import Lectures from '../pages/lectures'
+import { Lectures, Lecture } from '../pages'
 
 const adminRouter: RouteObject[] = [
 	{
-		index: true,
-		element: <Lectures />
+		path: '',
+		element: <Lectures />,
+		children: [
+			{
+				path: 'lectures/:id',
+				element: <Lecture />
+			}
+		]
 	}
 ]
 
