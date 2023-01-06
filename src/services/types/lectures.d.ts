@@ -23,3 +23,17 @@ declare namespace LectureError {
 	}
 }
 
+declare namespace Lecture {
+	export interface Lecture {
+		id: number
+		name: string
+		content: string
+		description: string
+	}
+
+	export interface RootObject {
+		message: string
+		lecture: Lecture
+	}
+}
+

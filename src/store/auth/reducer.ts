@@ -2,9 +2,8 @@ import { AxiosResponse } from 'axios'
 import { createReducer, PayloadAction } from '@reduxjs/toolkit'
 import { User, UserResponse } from '../../services/types/auth'
 import { logout } from './action'
-import { isFulfilled, isPending, isRejected } from './matcher'
 import { Status } from '../types'
-
+import { isMatch } from '../matcher'
 
 interface AuthState {
 	user?: User
@@ -37,19 +36,19 @@ const reducer = createReducer(initialState, (builder) => {
 		state.user = undefined
 		localStorage.clear()
 	})
-	builder.addMatcher(isFulfilled, (state, action: FulfilledAction) => {
+	builder.addMatcher(isMatch('auth/', '/fulfilled'), (state, action: FulfilledAction) => {
 		state.message = action.payload.data.message
 		state.status = 'fulfilled'
 		state.user = action.payload.data.user
 		localStorage.setItem('userToken', action.payload.data.user.token)
 	})
-	builder.addMatcher(isPending, (state) => {
+	builder.addMatcher(isMatch('auth/', '/pending'), (state) => {
 		state.status = 'pending'
 		state.user = undefined
 		state.message = undefined
 	})
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	builder.addMatcher(isRejected, (state, action: PayloadAction<any>) => {
+	builder.addMatcher(isMatch('auth/', '/rejected'), (state, action: PayloadAction<any>) => {
 		state.message = action.payload.message
 		state.status = 'rejected'
 		state.user = undefined

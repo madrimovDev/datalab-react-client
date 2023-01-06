@@ -1,15 +1,15 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit'
+import { isMatch } from '../matcher'
 import { Status } from '../types'
 import { getAllLectures } from './action'
-import { isPending, isRejected } from './matcher'
 
-interface LectureState {
+interface LecturesState {
 	message?: string
 	lectures: Lectures.Lecture[]
 	status: Status
 }
 
-const initialState: LectureState = {
+const initialState: LecturesState = {
 	message: undefined,
 	status: 'default',
 	lectures: []
@@ -22,11 +22,11 @@ const reducer = createReducer(initialState, (builder) => {
 		state.lectures = action.payload.data.lectures
 	})
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	builder.addMatcher(isRejected, (state, action: PayloadAction<any>) => {
+	builder.addMatcher(isMatch('lectures/', '/rejected'), (state, action: PayloadAction<any>) => {
 		state.message = action.payload.message
 		state.status = 'rejected'
 	})
-	builder.addMatcher(isPending, (state) => {
+	builder.addMatcher(isMatch('lectures/', '/pending'), (state) => {
 		state.status = 'pending'
 	})
 })

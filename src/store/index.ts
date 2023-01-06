@@ -1,11 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import authReducer from './auth/reducer'
-import lectureReducer from './lectures/reducer'
+import lecturesReducer from './lectures/reducer'
+import lectureReducer from './lecture/reducer'
+
 const store = configureStore({
 	reducer: {
 		auth: authReducer,
-		lectures: lectureReducer
+		lectures: lecturesReducer,
+		lecture: lectureReducer
 	},
 	middleware: (getDefaultMiddleware) => {
 		return getDefaultMiddleware({
