@@ -6,7 +6,7 @@ import { isMatch } from '../matcher'
 interface LectureState {
 	message?: string
 	status: Status
-	lecture?: Lectures.Lecture
+	lecture?: Lecture.Lecture
 }
 
 const initialState: LectureState = {
@@ -22,6 +22,7 @@ const reducer = createReducer(initialState, (builder) => {
 	builder.addMatcher(isMatch('lecture/', '/pending'), (state) => {
 		state.status = 'pending'
 	})
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	builder.addMatcher(isMatch('lecture/', '/rejected'), (state, action: PayloadAction<any>) => {
 		state.status = 'rejected'
 		state.message = action.payload.message

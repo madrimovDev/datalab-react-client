@@ -13,7 +13,7 @@ const Lectures = () => {
 	}, [])
 
 	return (
-		<Grid.Container>
+		<Grid.Container css={{ mt: '$8' }}>
 			<Grid xs={3}>
 				<Sidebar isAdmin={user?.isAdmin} />
 			</Grid>

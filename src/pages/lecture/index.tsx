@@ -1,15 +1,17 @@
 import { Container, Text } from '@nextui-org/react'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAppSelector } from '../../store'
+import { useAppDispatch, useAppSelector } from '../../store'
+import getById from '../../store/lecture/action'
 
 const Lecture = () => {
 	const { id } = useParams()
-	const { lectures } = useAppSelector((state) => state.lectures)
-	
-	const lecture = useMemo(() => {
+	const { lecture } = useAppSelector((state) => state.lecture)
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
 		if (id) {
-			return lectures.find((item) => item.id === +id)
+			dispatch(getById(id))
 		}
 	}, [id])
 
@@ -19,6 +21,7 @@ const Lecture = () => {
 		<Container>
 			<Text h2>{lecture.name}</Text>
 			<Text>{lecture.description}</Text>
+			<Text>{lecture.content}</Text>
 		</Container>
 	)
 }
