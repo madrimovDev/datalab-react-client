@@ -3,13 +3,13 @@ import { createReducer, PayloadAction } from '@reduxjs/toolkit'
 import { User, UserResponse } from '../../services/types/auth'
 import { logout } from './action'
 import { isFulfilled, isPending, isRejected } from './matcher'
+import { Status } from '../types'
 
-type Status = 'pending' | 'rejected' | 'fulfilled' | 'default'
 
 interface AuthState {
-	user: User | undefined
+	user?: User
 	status: Status
-	message: string | undefined
+	message?: string
 }
 
 type FulfilledAction = PayloadAction<
