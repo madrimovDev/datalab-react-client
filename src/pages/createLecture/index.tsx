@@ -1,39 +1,60 @@
-import { Text } from '@nextui-org/react'
-import React from 'react'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
+import React, { useRef, useState } from 'react'
+import { Button, Container, Grid, Text } from '@nextui-org/react'
+import Quill from '../../ui/quill/Quill'
 
 const CreateLecture = () => {
+	const [desc, setDesc] = useState<string>('')
+	const [content, setContent] = useState<string>('')
+	const [title, setTitle] = useState<string>('')
+
+	const handleClick = () => {
+		console.log()
+	}
+
 	return (
-		<div>
-			<Text>Description</Text>
-			<ReactQuill
-				modules={{
-					toolbar: [
-						['bold', 'italic', 'underline'], // toggled buttons
-						['blockquote', 'code-block'],
-
-						[{ list: 'ordered' }, { list: 'bullet' }],
-						[{ script: 'sub' }, { script: 'super' }], // superscript/subscript
-						[{ indent: '-1' }, { indent: '+1' }], // outdent/indent
-						[{ direction: 'rtl' }], // text direction
-
-						[{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-						[{ color: [] }, { background: [] }], // dropdown with defaults from theme
-						[{ font: [] }],
-						[{ align: [] }],
-
-						['clean']
-					]
-				}}
-				style={{
-					width: '100%',
-					height: '200px'
-				}}
-				theme='snow'
-			/>
-		</div>
+		<Grid.Container
+			style={{ width: '100%' }}
+			gap={4}
+		>
+			<Grid xs={12}>
+				<Container
+					css={{
+						d: 'flex',
+						ai: 'center',
+						jc: 'space-between'
+					}}
+				>
+					<Text h2>Create Lecture</Text>
+					<Button
+						onPress={handleClick}
+						shadow
+					>
+						Create
+					</Button>
+				</Container>
+			</Grid>
+			<Grid xs={12}>
+				<Quill
+					type='Title'
+					value={title}
+					setValue={setTitle}
+				/>
+			</Grid>
+			<Grid xs={12}>
+				<Quill
+					type='Description'
+					value={desc}
+					setValue={setDesc}
+				/>
+			</Grid>
+			<Grid xs={12}>
+				<Quill
+					type='Content'
+					value={content}
+					setValue={setContent}
+				/>
+			</Grid>
+		</Grid.Container>
 	)
 }
 
