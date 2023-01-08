@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madrimovDev/datalab-react-client.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -14,10 +18,8 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.3",
     "@reduxjs/toolkit": "^1.9.1",
-    "@types/axios": "^0.14.0",
     "axios": "^1.2.2",
     "eslint": "^8.31.0",
-    "highlight.js": "^11.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -31,7 +33,6 @@
     "@typescript-eslint/parser": "^5.47.1",
     "@vitejs/plugin-react": "^3.0.0",
     "eslint-plugin-react": "^7.31.11",
-    "react-icons": "^4.7.1",
     "react-quill": "^2.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"

@@ -1,6 +1,6 @@
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
-import { CreateLecture, Lecture, Lectures } from '../pages'
+import { Lectures } from '../pages'
 
 const userRouter: RouteObject[] = [
 	{
@@ -8,12 +8,8 @@ const userRouter: RouteObject[] = [
 		element: <Lectures />,
 		children: [
 			{
-				path: 'lectures/:id',
-				element: <Lecture />
-			},
-			{
-				path: 'create-lecture',
-				element: <CreateLecture />
+				path: 'lectures',
+				element: <Lectures />
 			}
 		]
 	}

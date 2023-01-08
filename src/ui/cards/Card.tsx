@@ -40,15 +40,14 @@ const Card = ({ item }: Props) => {
 			</CardContent>
 			<CardActions
 				sx={{
-					display: 'flex',
-					justifyContent: 'space-between'
+					display: 'flex'
 				}}
 			>
 				<Button
 					variant='contained'
 					color='primary'
 					size='small'
-					onClick={() => asLink('lectures' + item.id)}
+					onClick={() => asLink('lectures/' + item.id)}
 				>
 					Read Lectures
 				</Button>

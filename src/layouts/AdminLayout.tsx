@@ -6,16 +6,13 @@ import { Outlet } from 'react-router-dom'
 
 const AdminLayout = () => {
 	return (
-		<Box
-			width='100%'
-			height='100vh'
-		>
+		<>
 			<Navbar type='admin' />
 			<Container>
 				<Outlet />
 			</Container>
 			<SpeedDial />
-		</Box>
+		</>
 	)
 }
 
