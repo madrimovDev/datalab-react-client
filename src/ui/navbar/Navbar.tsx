@@ -1,8 +1,8 @@
 import React from 'react'
 import { AppBar, Button, Toolbar, Typography } from '@mui/material'
-import { MdLogout } from 'react-icons/md'
 import { useAppDispatch } from '../../store'
 import { logout } from '../../store/auth/action'
+import { Logout } from '@mui/icons-material'
 
 interface Props {
 	type: 'admin' | 'user'
@@ -11,7 +11,10 @@ interface Props {
 const Navbar = ({ type }: Props) => {
 	const dispatch = useAppDispatch()
 	return (
-		<AppBar>
+		<AppBar
+			component='nav'
+			position='sticky'
+		>
 			<Toolbar>
 				<Typography
 					component='div'
@@ -23,7 +26,7 @@ const Navbar = ({ type }: Props) => {
 					color='inherit'
 					size='small'
 					onClick={() => dispatch(logout())}
-					startIcon={<MdLogout />}
+					startIcon={<Logout />}
 				>
 					Logout
 				</Button>

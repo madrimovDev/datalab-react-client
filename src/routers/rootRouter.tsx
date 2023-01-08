@@ -6,8 +6,7 @@ import AdminLayout from '../layouts/AdminLayout'
 import { RequireAuth } from '../pages'
 import Auth from '../pages/auth'
 import RequireRole from '../pages/requireRole'
-// import RequireRole from '../pages/requireRole'
-// import adminRouter from './adminRouter'
+import adminRouter from './adminRouter'
 // import userRouter from './userRouter'
 
 const rootRouter = createBrowserRouter([
@@ -25,7 +24,8 @@ const rootRouter = createBrowserRouter([
 			},
 			{
 				path: '/admin',
-				element: <AdminLayout />
+				element: <AdminLayout />,
+				children: adminRouter
 			}
 		]
 	}

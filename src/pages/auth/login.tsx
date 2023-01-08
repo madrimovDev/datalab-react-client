@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../store'
 import { login } from '../../store/auth/action'
 import { Box, Paper, Stack, Typography, TextField, Button, Link as MLink, Divider } from '@mui/material'
-import { MdLogin } from 'react-icons/md'
+import { Login as MdLogin } from '@mui/icons-material'
 
 const Login = () => {
 	const [username, setUserName] = useState<string>('')

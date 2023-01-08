@@ -1,7 +1,8 @@
 import React from 'react'
-import { Box, Fab } from '@mui/material'
+import { Box, Container } from '@mui/material'
 
 import { Navbar, SpeedDial } from '../ui'
+import { Outlet } from 'react-router-dom'
 
 const AdminLayout = () => {
 	return (
@@ -10,6 +11,9 @@ const AdminLayout = () => {
 			height='100vh'
 		>
 			<Navbar type='admin' />
+			<Container>
+				<Outlet />
+			</Container>
 			<SpeedDial />
 		</Box>
 	)
