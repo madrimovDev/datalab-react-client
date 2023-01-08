@@ -28,6 +28,7 @@ const Card = ({ item }: Props) => {
 
 	return (
 		<MdCard
+			elevation={2}
 			sx={{
 				height: '100%',
 				display: 'flex',
@@ -40,7 +41,8 @@ const Card = ({ item }: Props) => {
 			</CardContent>
 			<CardActions
 				sx={{
-					display: 'flex'
+					display: 'flex',
+					flexWrap: 'wrap'
 				}}
 			>
 				<Button
