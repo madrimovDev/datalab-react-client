@@ -1,74 +1,92 @@
 import React, { FormEvent, useState } from 'react'
-import { Button, Card, Grid, Input, Link as NLink } from '@nextui-org/react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../store'
-import { register } from '../../store/auth/action'
+import { login, register } from '../../store/auth/action'
+import { Box, Paper, Stack, Typography, TextField, Button, Link as MLink, Divider } from '@mui/material'
+import { MdLogin } from 'react-icons/md'
 
 const Register = () => {
+	const [username, setUserName] = useState<string>('')
 	const [name, setName] = useState<string>('')
 	const [group, setGroup] = useState<string>('')
-	const [username, setUserName] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
-
 	const dispatch = useAppDispatch()
+
 	const onSubmit = (event: FormEvent) => {
 		event.preventDefault()
-		dispatch(register({ username, password, group, name }))
+		dispatch(register({ username, password, name, group }))
 	}
 
 	return (
-		<Grid.Container
-			css={{
-				w: '100dvw',
-				h: '100dvh'
+		<Box
+			sx={{
+				width: '100%',
+				height: '100vh',
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'center'
 			}}
-			justify='center'
-			alignItems='center'
 		>
-			<Card
-				as='form'
+			<Paper
+				component='form'
 				onSubmit={onSubmit}
-				css={{
-					w: '300px',
-					p: 30,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'stretch',
-					gap: '$10'
+				sx={{
+					width: '350px',
+					padding: '20px'
 				}}
+				variant='outlined'
 			>
-				<Input
-					label='Username'
-					type='text'
-					value={username}
-					onChange={(event) => setUserName(event.target.value)}
-				/>
-				<Input
-					label='Group'
-					type='text'
-					value={group}
-					onChange={(event) => setGroup(event.target.value)}
-				/>
-				<Input
-					label='Name'
-					type='text'
-					value={name}
-					onChange={(event) => setName(event.target.value)}
-				/>
-				<Input.Password
-					label='Password'
-					value={password}
-					onChange={(event) => setPassword(event.target.value)}
-				/>
-				<Button type='submit'>Signup</Button>
-				<NLink
-					to={'/auth/login'}
-					as={Link}
-				>
-					Login
-				</NLink>
-			</Card>
-		</Grid.Container>
+				<Stack spacing={2}>
+					<Typography variant='h5'>Create Account</Typography>
+					<Divider />
+					<TextField
+						size='small'
+						label='Username'
+						value={username}
+						onChange={(e) => setUserName(e.target.value)}
+					/>
+					<TextField
+						size='small'
+						label='Name'
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
+					<TextField
+						size='small'
+						label='Group'
+						value={group}
+						onChange={(e) => setGroup(e.target.value)}
+					/>
+					<TextField
+						size='small'
+						label='Password'
+						type='password'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					<Button
+						variant='contained'
+						type='submit'
+						endIcon={<MdLogin />}
+					>
+						Login
+					</Button>
+					<Divider />
+					<Typography>
+						Already have an account?
+						<MLink
+							ml={1}
+							underline='hover'
+							component={Link}
+							to='/auth/login'
+						>
+							Log in
+						</MLink>
+					</Typography>
+				</Stack>
+			</Paper>
+		</Box>
 	)
 }
 

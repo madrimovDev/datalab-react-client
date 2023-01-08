@@ -5,7 +5,7 @@ import { useAppSelector } from '../../store'
 const RequireRole = () => {
 	const { user } = useAppSelector((state) => state.auth)
 	const location = useLocation()
-	
+
 	return user?.isAdmin ? (
 		<Navigate
 			to={'/admin'}

@@ -1,8 +1,9 @@
-import { Button, Card, Grid, Input, Link as NLink } from '@nextui-org/react'
 import React, { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../store'
 import { login } from '../../store/auth/action'
+import { Box, Paper, Stack, Typography, TextField, Button, Link as MLink, Divider } from '@mui/material'
+import { MdLogin } from 'react-icons/md'
 
 const Login = () => {
 	const [username, setUserName] = useState<string>('')
@@ -15,46 +16,63 @@ const Login = () => {
 	}
 
 	return (
-		<Grid.Container
-			css={{
-				w: '100dvw',
-				h: '100dvh'
+		<Box
+			sx={{
+				width: '100%',
+				height: '100vh',
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'center'
 			}}
-			justify='center'
-			alignItems='center'
 		>
-			<Card
-				as='form'
+			<Paper
 				onSubmit={onSubmit}
-				css={{
-					w: '300px',
-					p: 30,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'stretch',
-					gap: '$10'
+				component='form'
+				sx={{
+					width: '350px',
+					padding: '20px'
 				}}
+				variant='outlined'
 			>
-				<Input
-					label='Username'
-					type='text'
-					value={username}
-					onChange={(event) => setUserName(event.target.value)}
-				/>
-				<Input.Password
-					label='Password'
-					value={password}
-					onChange={(event) => setPassword(event.target.value)}
-				/>
-				<Button type='submit'>Login</Button>
-				<NLink
-					to={'/auth/register'}
-					as={Link}
-				>
-					Signup
-				</NLink>
-			</Card>
-		</Grid.Container>
+				<Stack spacing={2}>
+					<Typography variant='h5'>Login</Typography>
+					<Divider />
+					<TextField
+						size='small'
+						label='Username'
+						value={username}
+						onChange={(e) => setUserName(e.target.value)}
+					/>
+					<TextField
+						size='small'
+						label='Password'
+						type='password'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					<Button
+						variant='contained'
+						type='submit'
+						endIcon={<MdLogin />}
+					>
+						Login
+					</Button>
+					<Divider />
+					<Typography>
+						No account?
+						<MLink
+							ml={1}
+							underline='hover'
+							component={Link}
+							to='/auth/register'
+						>
+							Create one
+						</MLink>
+					</Typography>
+				</Stack>
+			</Paper>
+		</Box>
 	)
 }
 
