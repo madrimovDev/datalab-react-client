@@ -1,9 +1,9 @@
 import React, { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../store'
-import { login, register } from '../../store/auth/action'
+import { register } from '../../store/auth/action'
 import { Box, Paper, Stack, Typography, TextField, Button, Link as MLink, Divider } from '@mui/material'
-import { MdLogin } from 'react-icons/md'
+import { Login } from '@mui/icons-material'
 
 const Register = () => {
 	const [username, setUserName] = useState<string>('')
@@ -68,7 +68,7 @@ const Register = () => {
 					<Button
 						variant='contained'
 						type='submit'
-						endIcon={<MdLogin />}
+						endIcon={<Login />}
 					>
 						Login
 					</Button>
